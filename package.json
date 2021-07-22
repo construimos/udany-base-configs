@@ -8,7 +8,7 @@
 		"sass": "^1.32.13",
 		"socket.io": "^4.1.2",
 		"socket.io-client": "^4.1.2",
-		"udany-toolbox": "git+ssh://git@github.com/construimos/udany-toolbox.git",
+		"udany-toolbox": "construimos/udany-toolbox",
 		"vue": "^3.1.4",
 		"vue-router": "^4.0.8"
 	},
