@@ -1,5 +1,5 @@
 {
-	"name": "udany-boilerplate",
+	"name": "udany-base-configs",
 	"version": "0.0.1",
 	"dependencies": {
 		"@babel/core": "^7.14.2",

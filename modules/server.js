@@ -10,6 +10,7 @@ import deepMerge from 'udany-toolbox/helpers/deepMerge.js';
 
 const defaultOptions = {
 	port: process.env.PORT ? parseInt(process.env.PORT) : 9420,
+	hmrPort: false,
 	isProd: process.env.NODE_ENV === 'production',
 
 	basePath: __dirname,
@@ -66,6 +67,9 @@ export default async function createServer(options = defaultOptions) {
 					interval: 100
 				},
 				https: options.https.enabled ? options.https.data : null,
+				hmr: {
+					port: options.hmrPort ? options.hmrPort : options.port + 2000
+				}
 			}
 		});
 
