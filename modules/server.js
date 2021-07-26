@@ -133,8 +133,8 @@ export default async function createServer(options = defaultOptions) {
 	app.__server = server;
 
 	return {
-		expressApp: app,
+		server,
+		app,
 		api,
-		server
 	};
 }
