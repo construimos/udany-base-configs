@@ -33,7 +33,9 @@ const defaultOptions = {
 			key: '',
 			cert: ''
 		}
-	}
+	},
+
+	onServerInitialized: (app) => {}
 };
 
 export default async function createServer(options = defaultOptions) {
@@ -50,6 +52,10 @@ export default async function createServer(options = defaultOptions) {
 		: {};
 
 	const app = express();
+
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({extended: false}));
+	if (options.onServerInitialized) options.onServerInitialized(app);
 
 	/** @type {import('vite').ViteDevServer} */
 	let vite;
@@ -83,9 +89,6 @@ export default async function createServer(options = defaultOptions) {
 			})
 		)
 	}
-
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: false}));
 
 	if (options.api.enabled) app.use(options.api.prefix, api);
 
