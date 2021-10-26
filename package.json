@@ -2,20 +2,20 @@
 	"name": "udany-base-configs",
 	"version": "0.0.1",
 	"dependencies": {
-		"@babel/core": "^7.14.2",
-		"@babel/preset-env": "^7.14.2",
-		"@babel/register": "^7.13.16",
-		"@vitejs/plugin-vue": "^1.2.2",
-		"@vue/compiler-sfc": "^3.0.5",
-		"axios": "^0.21.1",
+		"@babel/core": "^7.15.8",
+		"@babel/preset-env": "^7.15.8",
+		"@babel/register": "^7.15.3",
+		"@vitejs/plugin-vue": "^1.9.3",
+		"@vue/compiler-sfc": "^3.2.20",
+		"axios": "^0.24.0",
 		"body-parser": "^1.19.0",
 		"express": "^4.17.1",
-		"sass": "^1.32.13",
-		"socket.io": "^4.1.2",
-		"socket.io-client": "^4.1.2",
+		"sass": "^1.43.3",
+		"socket.io": "^4.3.1",
+		"socket.io-client": "^4.3.2",
 		"udany-toolbox": "construimos/udany-toolbox",
-		"vite": "^2.3.0",
-		"vue": "^3.1.4",
-		"vue-router": "^4.0.8"
+		"vite": "^2.6.11",
+		"vue": "^3.2.20",
+		"vue-router": "^4.0.12"
 	}
 }
