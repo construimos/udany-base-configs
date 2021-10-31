@@ -4,9 +4,12 @@ import https from 'https';
 import http from 'http';
 import express from 'express';
 import bodyParser from 'body-parser';
+import { renderToString } from 'vue/server-renderer'
 
 import api from './api.js';
 import deepMerge from 'udany-toolbox/helpers/deepMerge.js';
+
+import { UserConfigExport } from 'vite';
 
 const defaultOptions = {
 	port: process.env.PORT ? parseInt(process.env.PORT) : 9420,
@@ -22,6 +25,16 @@ const defaultOptions = {
 	api: {
 		enabled: true,
 		prefix: '/api'
+	},
+
+	ssr: {
+		enabled: false,
+		entry: './src/client/entry-server.js',
+		distEntry: '',
+		outlets: {
+			html: '<!--ssr-outlet-->',
+			preload: '<!--preload-links-->',
+		}
 	},
 
 	/** @type {UserConfigExport} **/
@@ -100,20 +113,32 @@ export default async function createServer(options = defaultOptions) {
 
 			if (!options.isProd) {
 				template = fs.readFileSync(resolve(options.client.path, 'index.html'), 'utf-8');
-
 				template = await vite.transformIndexHtml(url, template);
-
-				//render = (await vite.ssrLoadModule('/src/entry-server.js')).render
 			} else {
 				template = indexProd;
-				//render = require('./dist/server/entry-server.js').render
 			}
 
-			const [appHtml, preloadLinks] = ['', ''];//await render(url, manifest);
+			let [appHtml, preloadLinks] = ['', ''];
+
+			// SSR
+			if (options.ssr.enabled) {
+				if (!options.isProd) {
+					if (options.ssr.enabled) {
+						render = (await vite.ssrLoadModule(options.ssr.entry)).render;
+					}
+				} else {
+					render = require(options.ssr.distEntry).render
+				}
+
+				const { app: vueApp } = await render(url);
+
+				const ctx = {};
+				appHtml = await renderToString(vueApp, ctx);
+			}
 
 			const html = template
-			.replace(`<!--preload-links-->`, preloadLinks)
-			.replace(`<!--app-html-->`, appHtml);
+			.replace(options.ssr.outlets.preload, preloadLinks)
+			.replace(options.ssr.outlets.html, appHtml);
 
 			res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
 		} catch (e) {
