@@ -15,6 +15,13 @@ module.exports = function startBabelRegister(babelOptions) {
 						node: "current"
 					}
 				}
+			],
+			[
+				"@babel/preset-typescript",
+				{
+					allowDeclareFields: true,
+					onlyRemoveTypeImports: true,
+				}
 			]
 		],
 		...babelOptions
