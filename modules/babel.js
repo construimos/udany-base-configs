@@ -24,6 +24,7 @@ module.exports = function startBabelRegister(babelOptions) {
 				}
 			]
 		],
+		extensions: ['.js', '.ts'],
 		...babelOptions
 	});
 }
