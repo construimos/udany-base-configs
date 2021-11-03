@@ -1,12 +1,20 @@
 const babelRegister = require('@babel/register');
+const deepMerge = require('udany-toolbox/helpers/deepMerge.js');
 
 /**
  * Utility wrapper over @babel/register
  * Must be called before any attempts to use modern syntax within node
  * @param babelOptions
  */
-module.exports = function startBabelRegister(babelOptions) {
-	babelRegister({
+function startBabelRegister(babelOptions) {
+	babelRegister(deepMerge(
+		{ extensions: ['.js', '.ts'] },
+		getBabelOptions(babelOptions)
+	));
+}
+
+function getBabelOptions(babelOptions) {
+	return deepMerge({
 		presets: [
 			['@babel/preset-env', {
 				targets: {
@@ -24,7 +32,11 @@ module.exports = function startBabelRegister(babelOptions) {
 				legacy: true
 			}]
 		],
-		extensions: ['.js', '.ts'],
-		...babelOptions
-	});
+
+	}, babelOptions);
+}
+
+module.exports = {
+	getBabelOptions,
+	startBabelRegister
 }
