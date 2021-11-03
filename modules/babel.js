@@ -17,6 +17,10 @@ module.exports = function startBabelRegister(babelOptions) {
 				}
 			],
 			[
+				"@babel/plugin-proposal-decorators",
+				{}
+			],
+			[
 				"@babel/preset-typescript",
 				{
 					allowDeclareFields: true,
