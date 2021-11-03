@@ -21,7 +21,7 @@ module.exports = function startBabelRegister(babelOptions) {
 		],
 		plugins: [
 			['@babel/plugin-proposal-decorators', {
-				decoratorsBeforeExport: true
+				legacy: true
 			}]
 		],
 		extensions: ['.js', '.ts'],
