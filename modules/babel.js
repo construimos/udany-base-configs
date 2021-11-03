@@ -8,25 +8,21 @@ const babelRegister = require('@babel/register');
 module.exports = function startBabelRegister(babelOptions) {
 	babelRegister({
 		presets: [
-			[
-				"@babel/preset-env",
-				{
-					targets: {
-						node: "current"
-					}
+			['@babel/preset-env', {
+				targets: {
+					node: 'current'
 				}
-			],
-			[
-				"@babel/plugin-proposal-decorators",
-				{}
-			],
-			[
-				"@babel/preset-typescript",
-				{
-					allowDeclareFields: true,
-					onlyRemoveTypeImports: true,
-				}
-			]
+			}],
+
+			['@babel/preset-typescript', {
+				allowDeclareFields: true,
+				onlyRemoveTypeImports: true,
+			}]
+		],
+		plugins: [
+			['@babel/plugin-proposal-decorators', {
+				decoratorsBeforeExport: true
+			}]
 		],
 		extensions: ['.js', '.ts'],
 		...babelOptions
