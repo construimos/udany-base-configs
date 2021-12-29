@@ -34,6 +34,9 @@ function createViteConfig(options = defaultOptions) {
 					importer: function () { return null; }
 				}
 			}
+		},
+		optimizeDeps: {
+			exclude: ['udany-toolbox']
 		}
 	});
 }
