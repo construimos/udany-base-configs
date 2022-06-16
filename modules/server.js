@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 import { renderToString } from 'vue/server-renderer'
 
 import api from './api.js';
-import deepMerge from 'udany-toolbox/helpers/deepMerge.js';
+import deepMerge from 'udany-toolbox/modules/util/helpers/deepMerge.js';
 
 import { UserConfigExport } from 'vite';
 

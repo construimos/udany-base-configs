@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import deepMerge from 'udany-toolbox/helpers/deepMerge.js';
+import deepMerge from 'udany-toolbox/modules/util/helpers/deepMerge.js';
 
 const defaultOptions = {
 	root: './client',
