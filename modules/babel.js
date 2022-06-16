@@ -37,8 +37,8 @@ function getBabelOptions(babelOptions) {
 		presets: [
 			['@babel/preset-env', {
 				targets: {
-					node: 'current'
-				}
+					node: '10'
+				},
 			}],
 
 			['@babel/preset-typescript', {
@@ -48,7 +48,7 @@ function getBabelOptions(babelOptions) {
 		],
 		plugins: [
 			['@babel/plugin-proposal-decorators', {
-				legacy: true
+				version: "legacy"
 			}]
 		],
 
