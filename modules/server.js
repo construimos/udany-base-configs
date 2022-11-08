@@ -60,9 +60,9 @@ export default async function createServer(options = defaultOptions) {
 		fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
 		: '';
 
-	const manifest = options.isProd ?
-		require('./dist/client/ssr-manifest.json')
-		: {};
+	// const manifest = options.isProd ?
+	// 	require('./dist/client/ssr-manifest.json')
+	// 	: {};
 
 	const app = express();
 
