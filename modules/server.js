@@ -10,6 +10,7 @@ import api from './api.js';
 import deepMerge from 'udany-toolbox/modules/util/helpers/deepMerge.js';
 
 import { UserConfigExport } from 'vite';
+import { renderPreloadLinks } from './helpers/ssr.js';
 
 const defaultOptions = {
 	port: process.env.PORT ? parseInt(process.env.PORT) : 9420,
@@ -60,9 +61,9 @@ export default async function createServer(options = defaultOptions) {
 		fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
 		: '';
 
-	// const manifest = options.isProd ?
-	// 	require('./dist/client/ssr-manifest.json')
-	// 	: {};
+	const manifest = options.isProd ?
+		require(resolve('dist/client/ssr-manifest.json'))
+	 	: {};
 
 	const app = express();
 
@@ -127,13 +128,15 @@ export default async function createServer(options = defaultOptions) {
 						render = (await vite.ssrLoadModule(options.ssr.entry)).render;
 					}
 				} else {
-					render = require(options.ssr.distEntry).render
+					render = require(resolve(options.ssr.distEntry)).render;
 				}
 
-				const { app: vueApp } = await render(url);
+				const { app: vueApp } = await render(url, manifest);
 
 				const ctx = {};
 				appHtml = await renderToString(vueApp, ctx);
+
+				preloadLinks = renderPreloadLinks(ctx.modules, manifest)
 			}
 
 			const html = template
