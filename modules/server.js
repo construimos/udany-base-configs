@@ -90,7 +90,8 @@ export default async function createServer(options = defaultOptions) {
 				hmr: {
 					port: options.hmrPort ? options.hmrPort : options.port + 2000
 				}
-			}
+			},
+			appType: 'custom'
 		});
 
 		// use vite's connect instance as middleware
