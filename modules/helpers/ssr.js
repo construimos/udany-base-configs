@@ -1,3 +1,5 @@
+import path from 'path';
+
 export function renderPreloadLinks(modules, manifest) {
 	let links = ''
 	const seen = new Set()
