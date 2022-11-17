@@ -132,7 +132,9 @@ export default async function createServer(options = defaultOptions) {
 					render = require(resolve(options.ssr.distEntry)).render;
 				}
 
-				const { app: vueApp } = await render(url, manifest);
+				const { app: vueApp } = await render(url, {
+					req
+				});
 
 				const ctx = {};
 				appHtml = await renderToString(vueApp, ctx);
