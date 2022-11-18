@@ -21,6 +21,7 @@ function createViteConfig(options = defaultOptions) {
 
 	return defineConfig({
 		root: options.root,
+		envDir: '../../env',
 		plugins: [
 			vue()
 		],
