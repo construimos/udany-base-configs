@@ -62,7 +62,7 @@ export default async function createServer(options = defaultOptions) {
 		: '';
 
 	const manifest = options.isProd ?
-		require(resolve('dist/client/ssr-manifest.json'))
+		require(resolve('dist/client/.vite/ssr-manifest.json'))
 	 	: {};
 
 	const app = express();
